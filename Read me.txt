@@ -1,0 +1,91 @@
+Income Spending Survey Tool
+
+Description
+
+This project is a full-stack web application designed to collect and analyze user data on income and expenses. It was developed for a data analysis company to prepare for a new healthcare product launch. The application stack includes a Flask frontend, a MongoDB database, a Python processing script, and data analysis performed in a Jupyter Notebook. The final application is deployed on AWS Elastic Beanstalk.
+
+---
+
+ Features
+
+-   Web form for data collection (Age, Gender, Income, Expenses).
+-   Dynamic expense fields with checkboxes.
+-   Data persistence using a cloud-hosted MongoDB Atlas database.
+-   A data processing pipeline to convert raw JSON data to a structured CSV.
+-   Data analysis and visualization of key metrics.
+-   Cloud deployment for public access.
+
+---
+
+Technologies Used
+
+-   **Frontend**: HTML5
+-   **Backend**: Python, Flask
+-   **Database**: MongoDB (via MongoDB Atlas)
+-   **Data Analysis**: Python, Pandas, Matplotlib, Seaborn, Jupyter Notebook
+-   **Deployment**: AWS Elastic Beanstalk, Gunicorn
+
+---
+
+Setup and Installation
+
+Follow these steps to run the project locally.
+
+1.  **Clone the repository:**
+    ```bash
+    git clone [https://github.com/Babatee-83/final_Project.git](https://github.com/Babatee-83/final_Project.git)
+    cd Final_project
+    ```
+
+2.  **Create a virtual environment:**
+    ```bash
+    python -m venv venv
+    source venv/bin/activate  # On Windows, use `venv\Scripts\activate`
+    ```
+
+3.  **Install dependencies:**
+    ```bash
+    pip install -r requirements.txt
+    ```
+
+4.  **Set up MongoDB:**
+    -   Create a free cluster on [MongoDB Atlas](https://www.mongodb.com/cloud/atlas).
+    -   Get your connection string.
+
+5.  **Set Environment Variable:**
+    -   Create a file named `.env` and add your connection string:
+      `MONGO_URI="your_mongodb_connection_string"`
+    -   *Note: Our `app.py` and `process_data.py` look for this variable. For simple local testing, you can also hardcode it.*
+
+---
+
+ Usage
+
+1.  **Run the Flask Application:**
+    ```bash
+    python app.py
+    ```
+    Open your browser and go to `http://127.0.0.1:5555` to submit data.
+
+2.  **Process the Data:**
+    -   After submitting some data, run the processing script to generate a CSV file.
+    ```bash
+    python process_data.py
+    ```
+    This will create `survey_data.csv`.
+
+3.  **Analyze and Visualize Data:**
+    -   Launch Jupyter Notebook to see the analysis.
+    ```bash
+    jupyter lab analysis.ipynb
+    ```
+    Run the cells in the notebook to generate and export the charts.
+
+---
+ AWS Deployment Notes
+
+The application is deployed on AWS Elastic Beanstalk.
+
+-   The platform is **Python 3.x**.
+-   The `MONGO_URI` is configured as an environment property in the Elastic Beanstalk software configuration to keep credentials secure.
+-   The application is served by **Gunicorn**.
